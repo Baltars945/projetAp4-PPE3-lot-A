@@ -41,6 +41,7 @@ class InscriptionController extends AbstractController
         $newutilisateur -> setNbenfants(0);
 
         $clients = $clientrepository->findAll();
+        //mettre un truc pour qu'on vérifie qu'il n'y pas deux fois le même code utilisateur 
         $code = codeUtilisateur();
         $newutilisateur -> setCode($code);
 
