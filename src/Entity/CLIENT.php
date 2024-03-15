@@ -8,9 +8,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: CLIENTRepository::class)]
-class CLIENT implements UserInterface
+class CLIENT implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -50,7 +51,7 @@ class CLIENT implements UserInterface
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: COMMANDES::class)]
     private Collection $commandes;
 
-    #[ORM\Column(length: 35)]
+    #[ORM\Column(length: 255)]
     private ?string $password = null;
 
     public function __construct()
