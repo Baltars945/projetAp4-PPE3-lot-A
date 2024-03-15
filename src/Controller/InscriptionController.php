@@ -37,7 +37,6 @@ class InscriptionController extends AbstractController
         $newutilisateur -> setNom($nom);
         $newutilisateur -> setPrenom($nom);
         $newutilisateur -> setEmail($email);
-        $newutilisateur -> setRoles(0);
         $newutilisateur -> setNbenfants(0);
 
         $clients = $clientrepository->findAll();
@@ -56,6 +55,10 @@ class InscriptionController extends AbstractController
             $plaintextPassword
         );
         $newutilisateur->setPassword($hashedPassword);
+//Création du rôle du nouvel utilisateur 
+
+        $role = ["client"];
+        $newutilisateur -> setRoles($role);
 
 //Mise à jour de la bdd
         $entityManager->persist($newutilisateur);
