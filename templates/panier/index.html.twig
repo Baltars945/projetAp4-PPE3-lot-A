@@ -30,8 +30,7 @@
                     {% if PANIER.état == 0%}
                         {% for PRODUIT in produit %}
                             {% if PRODUIT.id == PANIER.produit.id %}
-                                <p1>{{PANIER.produit.id}}</p1>
-                                <p1>nom du produit:{{PRODUIT.nom}}<br></p1>
+                                <h5>Commande de : {{PRODUIT.nom}}<br></h5>
                                 <p2>nombre de produit : {{PANIER.quantite}}<br></p2>
                                 <p2>Prix :{{PRODUIT.prix}} €<br></p2>
                                 <p3>Prix total :{{COMMANDE.Prixtotal}} €</p2>
