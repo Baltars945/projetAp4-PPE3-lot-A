@@ -41,6 +41,11 @@
                                     <input type="hidden" name="idcommande" value={{COMMANDE.id}}>
                                     <input type="submit" value="Confirmer commande">
                                 </form>
+                                <form method="post" action="/supprimercommande">
+                                    <input type="hidden" name="idpanier" value={{PANIER.id}}>
+                                    <input type="hidden" name="idcommande" value={{COMMANDE.id}}>
+                                    <input type="submit" value="Supprimer commande">
+                                </form>
                             {% endif %} 
                         {% endfor %}
                     {% endif %}

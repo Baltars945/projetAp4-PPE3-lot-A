@@ -103,6 +103,32 @@ class PanierController extends AbstractController
             'panier' => $panier,
             'user' => $user,
         ]);
-    } 
+    }
+     #[Route('/supprimercommande', name:'app_supprimercommande')]
+    public function supprimercommande(Security $security,Request $request,EntityManagerInterface $entityManager
+    ,PRODUITRepository $produitrepository,COMMANDESRepository $commanderepository,PANIERRepository $panierrepository){
+        $client = $security->getUser();
+        $produits = $produitrepository->findAll();
+        $user = $entityManager->getRepository(CLIENT::class)->find($client);
+        $commande = $commanderepository->findAll();
+        $panier = $panierrepository ->findAll();
+
+        $idpanier = $_POST['idpanier'];
+        $idcommande = $_POST['idcommande'];
+        $thispanier = $entityManager->getRepository(PANIER::class)->find($idpanier);
+        $thiscommande = $entityManager->getRepository(COMMANDES::class)->find($idcommande);
+
+        $entityManager->remove($thispanier);
+        $entityManager->remove($thiscommande);
+        $entityManager->flush();
+
+        return $this->render('panier/index.html.twig', [
+            'controller_name' => 'PanierController',
+            'produit' => $produits,
+            'commande' => $commande,
+            'panier' => $panier,
+            'user' => $user,
+        ]);
+    }
 }
 
