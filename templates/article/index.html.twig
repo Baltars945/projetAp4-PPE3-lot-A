@@ -14,7 +14,7 @@
             {% endfor %}
 
     </div>
-    <div class="text-article" style="float:left">
+
         {% for PRODUIT in produit %}
             {% if PRODUIT.id == id%}
                 <h1>{{PRODUIT.nom}}</h1>
@@ -24,16 +24,18 @@
                 <h5>Créer par {{PRODUIT.fournisseur}}</h5>
             {% endif %}
         {% endfor %}
-        </div>
-    <div class="text-commander" style="float:right">
+
+    {% if app.user %}
     <p>Commander</p>
         <form method="post" action="/panier">
             <label for="quantity">Quantité:</label>
-            <input type="number" id="quantite" name="quantite" min="0" max="100" step="1" value="0">
+            <input type="number" id="quantite" name="quantite" min="1" max="100" step="1" value="1">
             <input type="hidden" name="produitid" value={{id}}>
             <input type="submit" value="Ajouter au panier">
         </form>
-    </div>
+    {% else %}
+    <p>Veuiller vous connecter pour commander.</p>
+    {% endif %}
 </body>
 
 {% endblock %}
