@@ -34,7 +34,7 @@
             <a href="{{path('app_commandes')}}" >
                 <li>Commandes</li>
             </a>
-            <a href="connexion">
+            <a href="login">
                 <li>Connexion</li>
             </a>
             <a href="panier">
@@ -43,6 +43,11 @@
             <a href="{{path('app_admin')}}">
                 <li>Admin</li>
             </a>
+            {% if app.user %}
+            <li> Statut: connecté</li>
+            {% else %}
+            <li> Statut: non connecté </li> 
+            {% endif %}
         </ul>
     </nav>
   </body>                                                                           
