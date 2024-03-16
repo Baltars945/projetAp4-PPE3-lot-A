@@ -8,9 +8,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: CLIENTRepository::class)]
-class CLIENT implements UserInterface
+class CLIENT implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,7 +22,7 @@ class CLIENT implements UserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    private ?int $roles = null;
+    private array $roles = [];
 
     #[ORM\Column(length: 55)]
     private ?string $nom = null;
@@ -50,7 +51,7 @@ class CLIENT implements UserInterface
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: COMMANDES::class)]
     private Collection $commandes;
 
-    #[ORM\Column(length: 35)]
+    #[ORM\Column(length: 255)]
     private ?string $password = null;
 
     public function __construct()
@@ -92,10 +93,14 @@ class CLIENT implements UserInterface
      */
     public function getRoles(): array
     {
-        return $this -> roles;
+        $roles = $this->roles;
+        // guarantee every user at least has Client
+        $roles[] = 'Client';
+
+        return array_unique($roles);
     }
 
-    public function setRoles(int $roles): static
+    public function setRoles(array $roles): static
     {
         $this->roles = $roles;
 

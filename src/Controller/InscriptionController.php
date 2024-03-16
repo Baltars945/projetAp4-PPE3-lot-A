@@ -9,6 +9,7 @@ use App\Entity\CLIENT;
 use App\Repository\CLIENTRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class InscriptionController extends AbstractController
 {
@@ -21,7 +22,7 @@ class InscriptionController extends AbstractController
     }
 
     #[Route('/createutilisateur', name: 'app_createutilisateur')]
-    public function createutilisateur(Request $request,EntityManagerInterface $entityManager,CLIENTRepository $clientrepository): Response
+    public function createutilisateur(Request $request,EntityManagerInterface $entityManager,CLIENTRepository $clientrepository,UserPasswordHasherInterface $passwordHasher): Response
     {
 
 //Récupération du form de la page d'inscription 
@@ -36,13 +37,28 @@ class InscriptionController extends AbstractController
         $newutilisateur -> setNom($nom);
         $newutilisateur -> setPrenom($nom);
         $newutilisateur -> setEmail($email);
-        $newutilisateur -> setPassword($password);
-        $newutilisateur -> setRoles(0);
         $newutilisateur -> setNbenfants(0);
 
         $clients = $clientrepository->findAll();
-        $code = codeUtilisateur();
+        
+        //mettre un truc pour qu'on vérifie qu'il n'y pas deux fois le même code utilisateur 
+        $random =  mt_rand(10000000, 99999999);
+        $code = "CLI" . $random;
         $newutilisateur -> setCode($code);
+
+//Création du mot de passe du nouveau utilisateur
+
+        $plaintextPassword = $password;
+
+        $hashedPassword = $passwordHasher->hashPassword(
+            $newutilisateur,
+            $plaintextPassword
+        );
+        $newutilisateur->setPassword($hashedPassword);
+//Création du rôle du nouvel utilisateur 
+
+        $role = ["client"];
+        $newutilisateur -> setRoles($role);
 
 //Mise à jour de la bdd
         $entityManager->persist($newutilisateur);
@@ -54,10 +70,10 @@ class InscriptionController extends AbstractController
     }
 
     /*Une fonction qui permet de créer un code client*/ 
-    public function codeUtilisateur(){
-        $random =  mt_rand(10000000, 99999999);
-        $code = "CLI" . $random;
+    //public function codeUtilisateur(){
+    //    $random =  mt_rand(10000000, 99999999);
+    //    $code = "CLI" . $random;
 
-        return $code;
-    }
+    //    return $code;
+    //}
 }
