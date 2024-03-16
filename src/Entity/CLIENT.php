@@ -149,12 +149,12 @@ class CLIENT implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->telephone = $telephone;
 
-        return $this;
+        return $this;   
     }
 
-    public function getDatenaissance(): ?\DateTimeInterface
+    public function getDatenaissance(): string
     {
-        return $this->datenaissance;
+        return $this->datenaissance->format('d-m-Y');
     }
 
     public function setDatenaissance(?\DateTimeInterface $datenaissance): static

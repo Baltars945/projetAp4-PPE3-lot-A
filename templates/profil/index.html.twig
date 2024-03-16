@@ -9,12 +9,41 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Bienvenue {{profil.prenom}} {{profil.nom}}</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/yann/Documents/cours BTS SIO 2/Informatique/Ap4/projetAp4-PPE3-lot-A/src/Controller/ProfilController.php'|file_link(0) }}">src/Controller/ProfilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/yann/Documents/cours BTS SIO 2/Informatique/Ap4/projetAp4-PPE3-lot-A/templates/profil/index.html.twig'|file_link(0) }}">templates/profil/index.html.twig</a></code></li>
-    </ul>
+    {% if form %}
+    <form method="POST" action= "/profilinformationsset">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" value="{{ profil.email }}"required><br>
+
+        <label for="name">Nom:</label>
+        <input type="text" id="name" name="name" value="{{ profil.nom }}" required>
+
+        <label for="surname">Prenom:</label>
+        <input type="text" id="surname" name="surname" value="{{ profil.prenom }}" required><br>
+
+        <label for="phoneNumber">Téléphone:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" value="{{ profil.telephone }}" required><br>
+
+        <label for="birthdate">Date de naissance:</label>
+        <input type="date" id="birthdate" name="birthdate" value="{{ profil.datenaissance }}" required><br>
+        
+
+        <button type="submit">Changer</button>
+    </form>
+
+    {% else %}
+    <li>Prenom : {{profil.prenom}} </li>
+    <li>Nom : {{profil.nom}}</li>  
+    <li>Email : {{profil.email}}</li> 
+    <li>Téléphone : {{profil.telephone}}</li>
+    <li>Date de naissance : {{profil.datenaissance}}</li>  
+    <li>Code client: {{profil.code}}</li>
+    
+    <form method="post" action="{{path('app_profil')}}">
+        <button type="submit" name="show">Changer les informations</button>
+    </form>
+    {% endif %}
+
 </div>
 {% endblock %}
