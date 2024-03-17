@@ -96,6 +96,7 @@ class PanierController extends AbstractController
         $thispanier ->setétat(1);
         $thiscommande ->setetat("confirmé");
 
+        $entityManager->flush();
         return $this->render('panier/index.html.twig', [
             'controller_name' => 'PanierController',
             'produit' => $produits,
