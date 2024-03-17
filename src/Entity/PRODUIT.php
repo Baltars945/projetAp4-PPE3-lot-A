@@ -7,29 +7,38 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 #[ORM\Entity(repositoryClass: PRODUITRepository::class)]
 class PRODUIT
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(["produitslist"])]
     private ?int $id = null;
 
+    #[Groups(["produitslist"])]
     #[ORM\Column(length: 100)]
     private ?string $nom = null;
 
+    #[Groups(["produitslist"])]
     #[ORM\Column]
     private ?float $prix = null;
 
+    #[Groups(["produitslist"])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
+    #[Groups(["produitslist"])]
     #[ORM\Column(length: 55)]
     private ?string $reference = null;
 
+    #[Groups(["produitslist"])]
     #[ORM\Column(length: 55, nullable: true)]
     private ?string $fournisseur = null;
 
+    #[Groups(["produitslist"])]
     #[ORM\ManyToOne(inversedBy: 'produits')]
     #[ORM\JoinColumn(nullable: false)]
     private ?LISTESPORTS $sport = null;
@@ -37,6 +46,7 @@ class PRODUIT
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: PANIER::class)]
     private Collection $panier;
 
+    #[Groups(["produitslist"])]
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: PHOTOSPRODUIT::class)]
     private Collection $photos;
 

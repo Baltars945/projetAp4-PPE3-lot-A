@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 #[ORM\Entity(repositoryClass: LISTESPORTSRepository::class)]
 class LISTESPORTS
 {
@@ -15,6 +17,7 @@ class LISTESPORTS
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(["produitslist"])]
     #[ORM\Column(length: 55)]
     private ?string $sport = null;
 
