@@ -43,6 +43,16 @@
     <form method="post" action="{{path('app_profil')}}">
         <button type="submit" name="show">Changer les informations</button>
     </form>
+
+    
+    <br>
+        {% if profil.roles[0] == "admin" %}
+            <br>
+            <p1>Ce compte est un compte administrateur</p1>
+            <a href="{{path('app_admin')}}">
+                <li>Admin</li>
+            </a>
+        {% endif %}
     {% endif %}
 
 </div>

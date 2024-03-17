@@ -10,6 +10,7 @@ use App\Entity\CLIENT;
 use Symfony\Component\Security\Core\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class ProfilController extends AbstractController
 {
@@ -29,7 +30,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
             'profil' => $profil,
-            'form' => $form
+            'form' => $form,
         ]);
     }
     #[Route('/profilinformationsset', name: 'app_profilinformationsset')]
@@ -58,7 +59,7 @@ class ProfilController extends AbstractController
         return $this->render('profil/index.html.twig', [
             'controller_name' => 'ProfilController',
             'profil' => $profil,
-            'form' => $form
+            'form' => $form,
         ]);
     }
 }
