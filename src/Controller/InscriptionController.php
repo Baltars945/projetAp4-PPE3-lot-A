@@ -38,9 +38,16 @@ class InscriptionController extends AbstractController
         $newutilisateur -> setPrenom($nom);
         $newutilisateur -> setEmail($email);
         $newutilisateur -> setNbenfants(0);
+// Date de naissance
 
-        $clients = $clientrepository->findAll();
+        $currentDateTime = new \DateTime();
+        $datenaissance = $currentDateTime->format('Y-m-d');
+        $datenaissanceobject = new \DateTime($datenaissance);
+
+        $newutilisateur ->setDatenaissance($datenaissanceobject);
         
+        $clients = $clientrepository->findAll();
+
         //mettre un truc pour qu'on vérifie qu'il n'y pas deux fois le même code utilisateur 
         $random =  mt_rand(10000000, 99999999);
         $code = "CLI" . $random;
