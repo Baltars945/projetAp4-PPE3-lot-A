@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello InscriptionController!{% endblock %}
+{% block title %}Hello ProfilController!{% endblock %}
 
 {% block body %}
 <style>
@@ -10,10 +10,7 @@
 
 <div class="example-wrapper">
 
-<p1> Utilisateur crée avec succès!</p1>
-<a href="login">
-    <p2>Retour à la page de connexion</p2>
-</a>
-
+<p1><strong>Changement du rôle réussi</strong></p1><br>
+<a href="{{path('app_profil')}}"><p1>Retour à la page de profil</p1></a>
 </div>
 {% endblock %}

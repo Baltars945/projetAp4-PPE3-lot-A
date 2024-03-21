@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\CLIENT;
+use App\Repository\CLIENTRepository;
 use Symfony\Component\Security\Core\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -66,4 +67,76 @@ class ProfilController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+    #[Route('/ajout', name: 'app_ajout')]
+    public function ajout(Security $security,
+    EntityManagerInterface $entityManager,CLIENTRepository $clientRepository): Response
+    {
+
+        $client = $security->getUser();
+        $profil = $entityManager->getRepository(CLIENT::class)->find($client);
+
+        $client = $clientRepository->findAll();
+        return $this->render('profil/ajout.html.twig', [
+            'controller_name' => 'AccueilController',
+            'client' => $client,
+            'profil' => $profil,
+        ]);
+    
+    }
+    //fonction pour changer le rôle en admin
+    #[Route('/ajoutadmin', name: 'app_ajoutadmin')]
+    public function ajoutadmin(Security $security,
+    EntityManagerInterface $entityManager,CLIENTRepository $clientRepository): Response
+    {
+        $idclient = $_POST['idclient'];
+        $client = $entityManager->getRepository(CLIENT::class)->find($idclient);
+
+
+        $role = ["admin"];
+        $client -> setRoles($role);
+        $entityManager->flush();
+        return $this->render('profil/postajout.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+    
+    }
+    //fonction pour changer le rôle en client
+    #[Route('/ajoutclient', name: 'app_ajoutclient')]
+    public function ajoutclient(Security $security,
+    EntityManagerInterface $entityManager,CLIENTRepository $clientRepository): Response
+    {
+        $idclient = $_POST['idclient'];
+        $client = $entityManager->getRepository(CLIENT::class)->find($idclient);
+
+
+        $role = ["client"];
+        $client -> setRoles($role);
+        $entityManager->flush();
+
+        return $this->render('profil/postajout.html.twig', [
+            'controller_name' => 'AccueilController',
+        ]);
+    
+    }
+
+        //fonction pour changer le rôle en client
+        #[Route('/ajoutcariste', name: 'app_ajoutcariste')]
+        public function ajoutcariste(Security $security,
+        EntityManagerInterface $entityManager,CLIENTRepository $clientRepository): Response
+        {
+            $idclient = $_POST['idclient'];
+            $client = $entityManager->getRepository(CLIENT::class)->find($idclient);
+    
+    
+            $role = ["cariste"];
+            $client -> setRoles($role);
+            $entityManager->flush();
+    
+            return $this->render('profil/postajout.html.twig', [
+                'controller_name' => 'AccueilController',
+            ]);
+        
+        }
 }

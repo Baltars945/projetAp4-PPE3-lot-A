@@ -10,6 +10,7 @@
 
 <div class="example-wrapper">
         {% for COMMANDES in commandes %}
+            {% if COMMANDES.client  == user%}
             {% if COMMANDES.etat != "non confirmer"%}
                 <h1><br>la commande: {{COMMANDES.id}}</h1>
                 <p1> état : {{COMMANDES.etat}}</p1>
@@ -20,6 +21,7 @@
                         pour un prix unitaire de {{PANIER.produit.prix}} euros <br></li>
                     {% endif %}
                 {% endfor %}
+            {% endif %}
             {% endif %}
         {% endfor %}
 </div>

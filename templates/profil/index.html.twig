@@ -49,9 +49,15 @@
         {% if profil.roles[0] == "admin" %}
             <br>
             <p1>Ce compte est un compte administrateur</p1>
+            <li>Aller sur la page de gestion des stocks 
             <a href="{{path('app_admin')}}">
-                <li>Admin</li>
+            <button>Page stocks</button>
             </a>
+            </li>
+            <li>Ajouter des comptes admin
+            <a href="{{path('app_ajout')}}">
+                <button>Ajouter</button>
+            </a></li>
         {% endif %}
     {% endif %}
 

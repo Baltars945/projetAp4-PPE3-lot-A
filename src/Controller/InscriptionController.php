@@ -35,7 +35,7 @@ class InscriptionController extends AbstractController
 //Création du nouveau utilisateur
         $newutilisateur = new CLIENT();
         $newutilisateur -> setNom($nom);
-        $newutilisateur -> setPrenom($nom);
+        $newutilisateur -> setPrenom($prenom);
         $newutilisateur -> setEmail($email);
         $newutilisateur -> setNbenfants(0);
 // Date de naissance

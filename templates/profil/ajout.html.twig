@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfilController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Ajouter des comtes admin</h1>
+    <a href="{{path('app_profil')}}"><p1>Retour à la page de profil</p1></a><br>
+
+        {% for CLIENT in client %}
+            {% if CLIENT != profil %}
+                <p1><strong> Compte : {{CLIENT.id}}</strong><br></p1>
+                <p1>Nom: {{CLIENT.nom}} Prenom: {{CLIENT.prenom}}<br></p1>
+                {% if CLIENT.roles == profil.roles %}
+                <form method="post" action="/ajoutclient">
+                    <input type="hidden" name="idclient" value={{CLIENT.id}}>
+                    <input type="submit" value="Changement de rôle en client">
+                </form>
+                <form method="post" action="/ajoutcariste">
+                    <input type="hidden" name="idclient" value={{CLIENT.id}}>
+                    <input type="submit" value="Changement de rôle en cariste">
+                </form>
+                {% else %}
+                <form method="post" action="/ajoutadmin">
+                    <input type="hidden" name="idclient" value={{CLIENT.id}}>
+                    <input type="submit" value="Changement de rôle en admin">
+                </form>
+
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+</div>
+{% endblock %}
