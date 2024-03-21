@@ -120,4 +120,23 @@ class ProfilController extends AbstractController
         ]);
     
     }
+
+        //fonction pour changer le rôle en client
+        #[Route('/ajoutcariste', name: 'app_ajoutcariste')]
+        public function ajoutcariste(Security $security,
+        EntityManagerInterface $entityManager,CLIENTRepository $clientRepository): Response
+        {
+            $idclient = $_POST['idclient'];
+            $client = $entityManager->getRepository(CLIENT::class)->find($idclient);
+    
+    
+            $role = ["cariste"];
+            $client -> setRoles($role);
+            $entityManager->flush();
+    
+            return $this->render('profil/postajout.html.twig', [
+                'controller_name' => 'AccueilController',
+            ]);
+        
+        }
 }

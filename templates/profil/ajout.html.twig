@@ -21,11 +21,16 @@
                     <input type="hidden" name="idclient" value={{CLIENT.id}}>
                     <input type="submit" value="Changement de rôle en client">
                 </form>
+                <form method="post" action="/ajoutcariste">
+                    <input type="hidden" name="idclient" value={{CLIENT.id}}>
+                    <input type="submit" value="Changement de rôle en cariste">
+                </form>
                 {% else %}
                 <form method="post" action="/ajoutadmin">
                     <input type="hidden" name="idclient" value={{CLIENT.id}}>
                     <input type="submit" value="Changement de rôle en admin">
                 </form>
+
                 {% endif %}
             {% endif %}
         {% endfor %}
