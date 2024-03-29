@@ -10,16 +10,44 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
-    Magasin: <br>
+
+
     {% for LIEUDISPONIBILITE in lieudisponibilite %}
         {% if LIEUDISPONIBILITE.produit.id == id %}
-            <p1>Au magasin {{LIEUDISPONIBILITE.magasin.nom}} le produit :{{LIEUDISPONIBILITE.produit.nom}} se trouve au rayon {{LIEUDISPONIBILITE.rayon}} il en y a {{LIEUDISPONIBILITE.quantite}}<br></p1>
+            {% set TotalStock = TotalStock + LIEUDISPONIBILITE.quantite %}
+        {% endif %}
+    {% endfor %}
+        {% for LIEUSTOCKAGE in lieustockage %}
+            {% if LIEUSTOCKAGE.produit.id == id %}
+                {% set TotalStock = TotalStock + LIEUSTOCKAGE.quantite %}
+            {% endif %}
+    {% endfor %}
+    {% for PRODUIT in produit %}
+        {% if PRODUIT.id == id %}
+            <p1>Dans tous magasin et entrepot confondu il y a {{TotalStock}} produit 
+            <br> le seuil critique est de {{PRODUIT.SeuilCritique}}<br></p1>
+            {% if PRODUIT.SeuilCritique > TotalStock %}
+                <h1> Attention le seuil critique est dépassé !</h1>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+    <br>Magasin: <br>
+    {% for LIEUDISPONIBILITE in lieudisponibilite %}
+        {% if LIEUDISPONIBILITE.produit.id == id %}
+            <p1>Au magasin {{LIEUDISPONIBILITE.magasin.nom}} 
+            le produit :{{LIEUDISPONIBILITE.produit.nom}} 
+            se trouve au rayon {{LIEUDISPONIBILITE.rayon}} 
+            il en y a {{LIEUDISPONIBILITE.quantite}}<br></p1>
         {% endif %}
     {% endfor %}
     Entrepot:<br>
     {% for LIEUSTOCKAGE in lieustockage %}
         {% if LIEUSTOCKAGE.produit.id == id %}
-            <p1>A l'entrepot {{LIEUSTOCKAGE.Entrepot.nom}} le produit :{{LIEUSTOCKAGE.produit.nom}} se trouve à l'étage {{LIEUSTOCKAGE.etage}} à l'étagère {{LIEUSTOCKAGE.etagere}} il en y a {{LIEUSTOCKAGE.quantite}}<br></p1>
+            <p1>A l'entrepot {{LIEUSTOCKAGE.Entrepot.nom}}
+             le produit :{{LIEUSTOCKAGE.produit.nom}}
+              se trouve à l'étage {{LIEUSTOCKAGE.etage}}
+               à l'étagère {{LIEUSTOCKAGE.etagere}}
+                il en y a {{LIEUSTOCKAGE.quantite}}<br></p1>
         {% endif %}
     {% endfor %}
 </div>
