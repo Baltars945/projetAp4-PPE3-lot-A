@@ -62,12 +62,16 @@ class PRODUIT
     #[ORM\Column(nullable: true)]
     private ?bool $Journalise = null;
 
+    #[ORM\OneToMany(mappedBy: 'produit', targetEntity: JOURNALISATION::class)]
+    private Collection $journalisation;
+
     public function __construct()
     {
         $this->panier = new ArrayCollection();
         $this->photos = new ArrayCollection();
         $this->lieudisponibilite = new ArrayCollection();
         $this->lieuentrepot = new ArrayCollection();
+        $this->journalisation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -287,6 +291,36 @@ class PRODUIT
     public function setJournalise(?bool $Journalise): static
     {
         $this->Journalise = $Journalise;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, JOURNALISATION>
+     */
+    public function getJournalisation(): Collection
+    {
+        return $this->journalisation;
+    }
+
+    public function addJournalisation(JOURNALISATION $journalisation): static
+    {
+        if (!$this->journalisation->contains($journalisation)) {
+            $this->journalisation->add($journalisation);
+            $journalisation->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJournalisation(JOURNALISATION $journalisation): static
+    {
+        if ($this->journalisation->removeElement($journalisation)) {
+            // set the owning side to null (unless already changed)
+            if ($journalisation->getProduit() === $this) {
+                $journalisation->setProduit(null);
+            }
+        }
 
         return $this;
     }
