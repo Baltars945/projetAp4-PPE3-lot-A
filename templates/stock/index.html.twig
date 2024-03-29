@@ -11,7 +11,6 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-
     {% for LIEUDISPONIBILITE in lieudisponibilite %}
         {% if LIEUDISPONIBILITE.produit.id == id %}
             {% set TotalStock = TotalStock + LIEUDISPONIBILITE.quantite %}
@@ -22,15 +21,13 @@
                 {% set TotalStock = TotalStock + LIEUSTOCKAGE.quantite %}
             {% endif %}
     {% endfor %}
-    {% for PRODUIT in produit %}
-        {% if PRODUIT.id == id %}
+        {% if produit.id == id %}
             <p1>Dans tous magasin et entrepot confondu il y a {{TotalStock}} produit 
-            <br> le seuil critique est de {{PRODUIT.SeuilCritique}}<br></p1>
-            {% if PRODUIT.SeuilCritique > TotalStock %}
+            <br> le seuil critique est de {{produit.SeuilCritique}}<br></p1>
+            {% if produit.SeuilCritique > TotalStock %}
                 <h1> Attention le seuil critique est dépassé !</h1>
             {% endif %}
         {% endif %}
-    {% endfor %}
     <br>Magasin: <br>
     {% for LIEUDISPONIBILITE in lieudisponibilite %}
         {% if LIEUDISPONIBILITE.produit.id == id %}

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello JournalisationController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+    
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code><a href="{{ '/home/yann/Documents/cours BTS SIO 2/Informatique/Ap4/projetAp4-PPE3-lot-A/src/Controller/JournalisationController.php'|file_link(0) }}">src/Controller/JournalisationController.php</a></code></li>
+        <li>Your template at <code><a href="{{ '/home/yann/Documents/cours BTS SIO 2/Informatique/Ap4/projetAp4-PPE3-lot-A/templates/journalisation/index.html.twig'|file_link(0) }}">templates/journalisation/index.html.twig</a></code></li>
+    </ul>
+
+       {% for JOURNALISATION in journalisation %}   
+            <p1> {{JOURNALISATION.date|date("m/d/Y")}} </p1>
+       {% endfor %}
+</div>
+{% endblock %}

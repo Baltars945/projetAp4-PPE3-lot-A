@@ -11,6 +11,9 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
+    <a href="{{path('app_journalisation')}}">
+        <h1>journalisation<br></h1>
+    </a>
     {% for PRODUIT in produit %}
     <a href="{{path('app_stock',{id:PRODUIT.id})}}">
         <p1>{{PRODUIT.nom}}<br></p1>
