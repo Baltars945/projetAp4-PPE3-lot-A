@@ -56,6 +56,12 @@ class PRODUIT
     #[ORM\OneToMany(mappedBy: 'produit', targetEntity: LIEUENTREPOT::class)]
     private Collection $lieuentrepot;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $SeuilCritique = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $Journalise = null;
+
     public function __construct()
     {
         $this->panier = new ArrayCollection();
@@ -257,6 +263,30 @@ class PRODUIT
                 $lieuentrepot->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSeuilCritique(): ?int
+    {
+        return $this->SeuilCritique;
+    }
+
+    public function setSeuilCritique(?int $SeuilCritique): static
+    {
+        $this->SeuilCritique = $SeuilCritique;
+
+        return $this;
+    }
+
+    public function isJournalise(): ?bool
+    {
+        return $this->Journalise;
+    }
+
+    public function setJournalise(?bool $Journalise): static
+    {
+        $this->Journalise = $Journalise;
 
         return $this;
     }
