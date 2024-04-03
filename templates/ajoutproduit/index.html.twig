@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AjoutProduitController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Création d'un produit</h1>
+
+       <form method="POST" action= "/ajoutproduit">
+
+        <label for="Nom">Nom:</label>
+        <input type="text" id="Nom" name="Nom" required><br>
+
+        <label for="Prix">Prix:</label>
+        <input type="number" id="Prix" name="Prix" step="0.01" required>
+
+        <label for="Description">Description:</label>
+        <input type="text" id="Description" name="Description"  required><br>
+
+        <label for="Fournisseur">Fournisseur:</label>
+        <input type="fournisseur" id="Fournisseur" name="Fournisseur" required><br>
+
+        <p1>Type de sport:</p1>
+
+        <label>Cyclisme:
+        <input type="radio"  name="sport" value="Cyclisme">
+        </label>
+
+        <label>Boxe:
+        <input type="radio"  name="sport" value="Boxe">
+        </label>
+
+        <label>Badminton:
+        <input type="radio"  name="sport" value="Badminton">
+        </label>
+
+        <label>Course:
+        <input type="radio"  name="sport" value="Course">
+        </label>
+        
+        <label>Musculation:
+        <input type="radio"  name="sport" value="Musculation">
+        </label>
+
+        <label>Golf:
+        <input type="radio" name="sport" value="Golf">
+        </label>
+        
+        <label for="SeuilCritique">SeuilCritique:</label>
+        <input type="number" id="SeuilCritique" name="SeuilCritique" step="1" required><br>
+
+        <button type="submit">Ajouter</button>
+    </form>
+</form>
+
+</div>
+{% endblock %}
