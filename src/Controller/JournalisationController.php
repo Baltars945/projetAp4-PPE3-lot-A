@@ -10,14 +10,14 @@ use App\Repository\JOURNALISATIONRepository;
 
 class JournalisationController extends AbstractController
 {
-    #[Route('/journalisation', name: 'app_journalisation')]
-    public function index(JOURNALISATIONRepository $journalisationrepository): Response
+    #[Route('/journalisation/{id}', name: 'app_journalisation')]
+    public function index(int $id,JOURNALISATIONRepository $journalisationrepository): Response
     {
         $journalisationrepository = $journalisationrepository ->findAll();
-
         return $this->render('journalisation/index.html.twig', [
             'controller_name' => 'JournalisationController',
-            'journalisation' => $journalisationrepository
+            'journalisation' => $journalisationrepository,
+            'id' => $id,
         ]);
     }
 }

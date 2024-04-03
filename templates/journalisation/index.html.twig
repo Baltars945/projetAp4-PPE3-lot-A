@@ -12,13 +12,11 @@
     <h1>Hello {{ controller_name }}! ✅</h1>
     
     This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/yann/Documents/cours BTS SIO 2/Informatique/Ap4/projetAp4-PPE3-lot-A/src/Controller/JournalisationController.php'|file_link(0) }}">src/Controller/JournalisationController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/yann/Documents/cours BTS SIO 2/Informatique/Ap4/projetAp4-PPE3-lot-A/templates/journalisation/index.html.twig'|file_link(0) }}">templates/journalisation/index.html.twig</a></code></li>
-    </ul>
 
        {% for JOURNALISATION in journalisation %}   
-            <p1> {{JOURNALISATION.date|date("m/d/Y")}} </p1>
+            {% if JOURNALISATION.produit.id == id %}
+                <br> <p1> {{JOURNALISATION.date|date("m/d/Y")}} </p1>
+            {% endif %}
        {% endfor %}
 </div>
 {% endblock %}
